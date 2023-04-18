@@ -16,7 +16,7 @@ def get_env(env):
       print("   Exiting script. Please add and run again.")
       quit()
 
-env_vars = ["VENMO_ACCESS_TOKEN", "K_FRIEND_ID"]
+env_vars = ["VENMO_ACCESS_TOKEN", "B_FRIEND_ID", "C_FRIEND_ID"]
 
 def verify_env_vars(vars, numOfExpected):
   """
@@ -58,6 +58,15 @@ def get_week(now):
 
     week = now.strftime("%U")
     return week
+
+def get_month(now):
+    """
+    Returns the current week
+    Example: April
+    """
+
+    month = now.strftime("%B")
+    return month
 
 class Venmo:
     def __init__(self, access_token):
