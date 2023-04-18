@@ -1,38 +1,28 @@
 from venmo_api import Client
 from dotenv import load_dotenv
-from notifiers import get_notifier
 from datetime import datetime
 
-from utils import get_env, env_vars, get_month, Venmo, Telegram
+from utils import get_env, env_vars, get_week, Venmo
 
 def main(now):
   """
   The main function which initiates the script.
   """
 
-  load_dotenv()  # take environment variables from .env.
+  load_dotenv()  # take environment variables from .env
   actualVars = []
   for var in env_vars:
     actualVars.append(get_env(var))
 
-  access_token, chat_id, bot_token, k_friend_id, c_friend_id, w_friend_id, j_friend_id = actualVars
+  access_token, k_friend_id = actualVars
 
-  month = get_month(now)
+  week = get_week(now)
   venmo = Venmo(access_token)
-  telegram = Telegram(bot_token, chat_id)
 
   friends =[
     {
-      "name": "KRam",
+      "name": "Billy",
       "id": k_friend_id,
-    },
-    {
-      "name": "Chrissy",
-      "id": c_friend_id,
-    },
-    {
-      "name": "Will",
-      "id": w_friend_id,
     },
   ]
 
@@ -42,15 +32,9 @@ def main(now):
   for friend in friends:
     name = friend["name"]
     id = friend["id"]
-    description = "Spotify for the month of " + month + "— Sent by Joe's Assistant Efron 🤵🏻‍♂️"
-    amount = 3.00
-    message = f"""Good news old sport!
-
-I have successfully requested money from {name}.
-
-— Efron 🤵🏻‍♂️
-    """
-    success = venmo.request_money(id, amount, description, telegram.send_message(message))
+    description = "Payment for week " + week + " -Matt"
+    amount = 20.00
+    success = venmo.request_money(id, amount, description)
     if success:
       successfulRequests.append(success)
 

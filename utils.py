@@ -1,6 +1,5 @@
 import os
 from venmo_api import Client, PaymentPrivacy
-from notifiers import get_notifier
 
 def get_env(env):
   """
@@ -17,7 +16,7 @@ def get_env(env):
       print("   Exiting script. Please add and run again.")
       quit()
 
-env_vars = ["VENMO_ACCESS_TOKEN", "TELEGRAM_CHAT_ID", "TELEGRAM_BOT_TOKEN", "K_FRIEND_ID", "C_FRIEND_ID", "W_FRIEND_ID", "J_FRIEND_ID"]
+env_vars = ["VENMO_ACCESS_TOKEN", "K_FRIEND_ID"]
 
 def verify_env_vars(vars, numOfExpected):
   """
@@ -51,14 +50,14 @@ def get_env_vars(vars):
 
     return allVars
 
-def get_month(now):
+def get_week(now):
     """
-    Returns the current month.
-    Example: April
+    Returns the current week
+    Example: 52
     """
 
-    month = now.strftime("%B")
-    return month
+    week = now.strftime("%U")
+    return week
 
 class Venmo:
     def __init__(self, access_token):
@@ -75,12 +74,3 @@ class Venmo:
     def request_money(self, id, amount, description, callback = None):
         # Returns a boolean: true if successfully requested
         return self.client.payment.request_money(amount, description, id, PaymentPrivacy.PUBLIC, None, callback)
-
-class Telegram:
-    def __init__(self, bot_token, chat_id):
-        self.bot_token = bot_token
-        self.chat_id = chat_id
-        self.client = get_notifier('telegram')
-
-    def send_message(self, message):
-        self.client.notify(message=message, token=self.bot_token, chat_id=self.chat_id)
