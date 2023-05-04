@@ -1,3 +1,6 @@
 notifiers==1.2.1
 python-dotenv==0.16.0
 venmo-api==0.3.0
+numpy-financial==1.0.0
+pandas==1.2.3
+matplotlib==3.2.2

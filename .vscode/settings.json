@@ -1,3 +1,6 @@
 {
-  "python.pythonPath": "c:/users/mosborn/appdata/local/miniconda3/python.exe"
+  "python.pythonPath": "c:/users/mosborn/appdata/local/miniconda3/python.exe",
+  "CodeGPT.model": "gpt-4",
+  "CodeGPT.maxTokens": 1000,
+  "CodeGPT.temperature": 0.5
 }

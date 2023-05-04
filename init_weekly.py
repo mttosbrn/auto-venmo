@@ -2,7 +2,7 @@ from venmo_api import Client
 from dotenv import load_dotenv
 from datetime import datetime
 
-from utils import get_env, env_vars, get_week, get_month, Venmo
+from utils import get_env, env_vars, get_week, Venmo
 
 def main(now):
   """
@@ -14,10 +14,9 @@ def main(now):
   for var in env_vars:
     actualVars.append(get_env(var))
 
-  access_token, b_friend_id, c_friend_id = actualVars
+  access_token, b_friend_id, c_friend_id, c2_friend_id, l_friend_id = actualVars
 
   week = get_week(now)
-  month = get_month(now)
   venmo = Venmo(access_token)
 
   weekly =[
@@ -27,30 +26,14 @@ def main(now):
     },
   ]
 
-  monthly =[
-    {
-      "name": "Caio",
-      "id": c_friend_id,
-    },
-  ]
-
   successfulRequests = []
-  expectedRequests = len(weekly) + len(monthly)
+  expectedRequests = len(weekly)
 
   for friend in weekly:
     name = friend["name"]
     id = friend["id"]
-    description = "Payment for week " + week + " thanks -Matt"
+    description = "Payment week " + week + ", thanks -Matt"
     amount = 20.00
-    success = venmo.request_money(id, amount, description)
-    if success:
-      successfulRequests.append(success)
-
-  for friend in monthly:
-    name = friend["name"]
-    id = friend["id"]
-    description = "Payment for month " + month + " thanks -Matt"
-    amount = 500.00
     success = venmo.request_money(id, amount, description)
     if success:
       successfulRequests.append(success)

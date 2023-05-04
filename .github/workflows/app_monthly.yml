@@ -5,9 +5,9 @@ name: Run Script
 
 on:
   schedule:
-    # Every Friday around 10am
-    # https://crontab.guru/#0_10_*_*_5
-    - cron: "0 10 * * 5"
+    # At 10:00 on day-of-month 15
+    # https://crontab.guru/#0_10_15_*_*
+    - cron: "0 10 15 * *"
   workflow_dispatch:
 
 jobs:
@@ -33,8 +33,10 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Run script
         run: |
-          python init.py
+          python init_monthly.py
         env:
           VENMO_ACCESS_TOKEN: ${{ secrets.VENMO_ACCESS_TOKEN }}
           B_FRIEND_ID: ${{ secrets.B_FRIEND_ID }}
           C_FRIEND_ID: ${{ secrets.C_FRIEND_ID }}
+          C2_FRIEND_ID: ${{ secrets.B_FRIEND_ID }}
+          L_FRIEND_ID: ${{ secrets.C_FRIEND_ID }}
