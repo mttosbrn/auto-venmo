@@ -40,16 +40,14 @@ def main(now):
   successfulRequests = []
   expectedRequests = len(amy_monthly) + len(matt_monthly)
 
-# "Payment for " + month + "
-
-  for friend in amy_monthly:
-    name = friend["name"]
-    id = friend["id"]
-    description = "This is just a test, thanks -Amy's assitant 🤵🏻"
-    amount = 1.00
-    success = venmo.request_money(id, amount, description)
-    if success:
-      successfulRequests.append(success)
+#  for friend in amy_monthly:
+#    name = friend["name"]
+#    id = friend["id"]
+#    description = "Payment for " + month + ", thanks -Amy's assitant 🤵🏻"
+#    amount = 0.00
+#    success = venmo.request_money(id, amount, description)
+#    if success:
+#      successfulRequests.append(success)
 
   for friend in matt_monthly:
     name = friend["name"]
