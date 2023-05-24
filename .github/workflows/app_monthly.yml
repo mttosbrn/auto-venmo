@@ -5,9 +5,9 @@ name: Run Script
 
 on:
   schedule:
-    # At 10:00 on day-of-month 15
-    # https://crontab.guru/#0_10_15_*_*
-    - cron: "0 10 15 * *"
+    # At 10:00 on day-of-month 1
+    # https://crontab.guru/#0_10_1_*_*
+    - cron: "0 10 1 * *"
   workflow_dispatch:
 
 jobs:
